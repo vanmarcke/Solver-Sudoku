@@ -525,11 +525,11 @@ section {
   }
 }
 
-.responsiveimg {
-  max-width: -moz-available;
+@media (max-width: 1284px) {
+  .responsiveimg {
+    max-width: 80%;
   }
-
-
+}
 
 #about .about-content {
   background: #fff;

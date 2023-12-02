@@ -527,7 +527,7 @@ section {
 
 @media (max-width: 1284px) {
   .responsiveimg {
-    max-width: 80%;
+    max-width: 100%;
   }
 }
 

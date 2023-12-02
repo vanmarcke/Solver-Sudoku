@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Solver de Sudoku - Techniques</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Facebook Opengraph integration: https://developers.facebook.com/docs/sharing/opengraph -->
+  <meta property="og:title" content="">
+  <meta property="og:image" content="">
+  <meta property="og:url" content="">
+  <meta property="og:site_name" content="">
+  <meta property="og:description" content="">
+
+  <!-- Twitter Cards integration: https://dev.twitter.com/cards/  -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="">
+  <meta name="twitter:title" content="">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Imperial
+  * Updated: Nov 17 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/imperial-free-onepage-bootstrap-theme/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo mr-auto"><img src="assets/img/logo4.png" alt=""></a>
+      <!-- Uncomment below if you prefer to use a text logo -->
+      <!-- <h1 class="logo mr-auto"><a href="index.html">Imperial</a></h1> -->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto " href="index.html#portfolio">Retour</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar --> 
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Les aspects techniques</h2>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+
+                <div class="swiper-slide">
+                  <img src="assets/img/portfolio/aspects-techniques1.webp" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="assets/img/portfolio/aspects-techniques2.png" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="assets/img/portfolio/aspects-techniques3.png" alt="">
+                </div>
+
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="portfolio-info">
+              <h3>Projet information</h3>
+              <ul>
+                <li><strong>Catégorie</strong>: Techniques</li>
+                <li><strong>Date du projet</strong>: 10 décembre 2023</li>
+              </ul>
+            </div>
+            <div class="portfolio-description"><br>
+              <h2>Résumé</h2>
+              
+              <p>
+                Chargement d’une image et suppression des couleurs <br>
+                Rotation manuelle de l’image <br>
+                Détection de la grille et de la position des cases <br>
+                Découpage de l’image <br>
+                Solver sudoku <br>
+                Réseau de neurones <br>
+              </p>
+            </div>
+          </div>
+
+          <div class="portfolio-description">
+            <h2>Chargement d’une image et suppression des couleurs</h2>
+            <p>
+              Le chargement de l’image s’oppère en utilisant les PixelBuffers offerts par Gdk. Cet objet
+              dispose d’une fonction permettant de charger une image de format courant (png, jpeg, ...) directement,
+              ainsi que de rapidement obtenir un objet pour Gtk.
+            </p>
+            <p>
+              La suppression des couleurs s’oppère en prenant les cannaux rouges, verts et bleus de l’image
+              et les pondérants avec les poids 0,2126 pour le rouge, 0,7152 pour le vert et 0,0722 pour le bleu.
+              Ces poids sont des poids courants déterminés à partir de la sensibilité de l’oeil humain aux
+              différentes composantes de la lumière blanche.
+            </p>
+          </div>
+
+          <div class="portfolio-description">
+            <h2>Rotation manuelle de l’image</h2>
+            <p>
+              La rotation de l’image est implémentée en utilisant de façon intensive la bibliothèque Cairo
+              sur laquelle est basée Gtk. Cette bibliothèque fournit en effet les fonctions de géometrie courante
+              comme la translation, la rotation mises à l’échelle directement.
+            </p>
+            <p>
+              De façon plus détaillée, nous avons rencontré différents problèmes. Le premier était d’utiliser GTK3.0+,
+              car ce n’est pas une bibliothèque étudiée en cours. C’etait beaucoup plus compliqué de s’infornmer
+              surtout que la documentation officielle n’est pas très compréhensible et ne donne pas
+              énormement d’informations.
+            </p>
+            <p>
+              Nous avons tout d’abord commencé à réfléchir sur le résultat attendu lors d’une rotation avec un
+              angle précis. Le premier problème était de redimensionner l’image finale car si elle n’est pas
+              redimensionnée, on risque de perdre des informations importantes sur la grille de sudoku (voir
+              image ci-dessous).
+            </p>
+
+            <div class="text-center">
+              <img class="responsiveimg" src="assets/img/figure5.png" alt="">
+              <p> <br>
+                Ici, les parties en rouge sont nécessaires pour avoir toutes les informations de l’image originale.
+              </p>
+            </div>
+
+            <p>
+              Nous avons essayé d’implémenter la rotation de l’image mais les pixels sont stockés
+              différemment. L’implémentation générale étudiée en classe était un tableau de tableau contenant
+              un élément qui a 3 ou 4 attributs qui étaient RGBA ou RGB. Avec GTK, il y a seulement un
+              tableau donc une implementation en Row-Major order et, où les 3 ou 4 premières valeurs
+              correspondent aux valeurs RGBA du premier pixel et ainsi de suite.
+            </p>
+            <p>
+              Suite à un temps considérable de recherches, nous avons découvert qu’une fonction intégrée existait
+              déjà avec Cairo, un outils spécialisé dans la manipulation d’image. nous avons donc du passer encore
+              quelques heures sur la faible documentation disponible afin de comprendre son fonctionnement.
+            </p>
+            <p>
+              A la fin, l’algorithme était assez simple : <br>
+              - Créer une nouvelle image blanche avec les dimensions finales. <br>
+              - Coller l’image de base tournée. <br>
+              Mais, la dernière étape nécessitait une compréhension approfondie du collage de l’image. En
+              effet, pour coller l’image, il fallait s’assurer qu’elle soit bien centrée à la fin en ne perdant aucune
+              information. Cependant, la fonction de collage commençait avec le pixel en haut à gauche de
+              l’image de base. Il a donc fallu calculer les coordonnées de ce pixel à l’image finale afin de bien
+              se placer pour le coller efficacement.
+            </p>
+          </div>
+
+          <div class="portfolio-description">
+            <h2>Détection de la grille et de la position des cases</h2>
+            <p>
+              La détection de la grille se découpe en trois étapes : nous commencons par aténuer les contours
+              afin de limiter les faux positifs puis, un algorithme de détection de contours est appliqué et
+              enfin, un algorithme permettant de détecter des droites dans les contours précédents. Pour
+              l’aténuation des contours, nous faisons usage d’un masque discret de 3 par 3 pixels. Les pixels hors
+              de l’image sont systématiquement considérés comme noirs.
+            </p>
+            <p>
+              Une fois ce filtre appliqué, nous affectons un filtre de Sobel pour détecter les contours. Il
+              est simple à implémenter et donne relativement de bons résultats sur les images testées. Ce
+              filtre consiste en l’application de deux masques sur l’image. Encore une fois, les pixels hors de
+              l’image seront considérés comme noirs et le carré des résultats de ces deux masques est sommé.
+              Nous récupèrons ensuite la racine de cette somme que l’on divise par la valeur maximale possible
+              afin d’obtenir un résultat compris entre 0 et 1. Puis, cette valeur est multipliée par 255,9999
+              puis passée au format d’entier naturel sur 8bits afin d’obtenir une valeur entière entre 0 et 255
+              sur les trois canneaux rouge, vert et bleu.
+            </p>
+            <p>
+              Une fois ce filtre appliqué, nous utilisons une transformée de Hough pour détecter les différentes droites qui composent l’image.
+            </p>
+          </div>
+
+          <div class="portfolio-description">
+            <h2>Découpage de l’image</h2>
+            <p>
+              Le découpage de l’image se passe en trois parties : dans un premier temps, la transformée
+              de Hough est appliquée sur l’ensemble de l’image permettant ainsi de détécter les différentes
+              droites composant la grille. Cette opération se fait en passant d’un espace en coordonnées cartésiennes
+              à un espace en coordonnées polaires. Dans cet espace, tous les points composant une
+              même droite sont sur le même point.
+            </p>
+            <p>
+              Nous pouvons ainsi par des opérations de trigonométrie récupérer les différentes droites composant
+              l’image. Il est à noté que cette technique ne sert pas uniquement à trouver des droites
+              mais également des segments de droites sous leurs formes probabilisées. Le code utilisé pour
+              la transformée de Hough est ici une adaptation de l’implémentation de la célèbre bibliothèque
+              OpenCV. Nous avions commencé avec une implémentation "faite maison". En revanche cette
+              dernière souffrait d’imprécisions ainsi que d’un manque critique de performance. Il fallait de
+              l’ordre de 1 minute et 4Gio de RAM pour détecter les contours d’une grille simple.
+            </p>
+            <p>
+              Après, nous recherchons les plus petits quadrilatères possibles dans l’image pour ensuite
+              les enregister comme étant les différentes cases du Sudoku recherché pour ce faire, nous trions
+              les droites trouvées entre les droites verticales et les droites horizontales. Ce tri s’opère en
+              appliquant une fonction de seuil sur la composante x du vecteur directeur. En effet plus x se
+              rapproche de la valeur 1, plus la ligne se rapproche de la verticale. Une fois ceci fait, les droites
+              verticales sont triées en fonction de leur valeur de absice et les droites horizontale en fonction
+              de leur hordonée. Une fois ce tris fait les deux listes sont parcourues afin de trouver les cases.
+            </p>
+            <p>
+              Les cases sont ensuite trouvé en calculant 4 intersections de droite donnant ainsi les coordonée des 4 sommets de la grille.
+            </p>
+            <p>
+              Le quadrilatère connexe défini par ces 4 points est ensuite extrait de l’image pour être placé
+              sur une image de taille minimal au fond blanc puis sauvegardée. Pour obtenir l’image finale,
+              nous récupérons l’ensemble des pixels de l’image de base compris entre la plus petite et la plus
+              grande ordonnée du quadrilatère ainsi qu’ entre sa plus petite et plus grande abscisse.
+            </p>
+          </div>
+
+          <div class="portfolio-description">
+            <h2>Solver sudoku</h2>
+            <p>
+              Hors mis le fait que le sudoku est un jeu de puzzle divertissant, stimulant et particulièrement
+              attrayant une fois qu’on s’y habitue, sa résolution nous a toujours intéressé et intrigué. C’est la
+              raison pour laquelle nous avons pris en charge l’algorithme permettant de le résoudre.
+            </p>
+
+            <p>
+              Le principe d’un sudoku est simple. Le joueur a pour tâche de remplir les cases vides avec
+              les chiffres manquants et ainsi compléter la grille en se basant sur la logique. Au début du jeu,
+              la grille de taille 9*9 a des cases qui sont au préalable déjà remplies. Ainsi, la consigne est d’assigner
+              des chiffres compris entre 1 et 9 dans les cases de cette grille qui sont vides. Cependant, il
+              est strictement interdit selon les règles du sudoku d’avoir un doublon sur une ligne, une colonne
+              ou dans un mini carré de taille 3*3. Dans le cas ou un chiffre est déjà présent, on testera avec
+              un autre chiffre si ce dernier est présent. C’est un exercice de réflexion et de logique permettant
+              de faire travailler intensivement le cerveau en stimulant les neurones.
+            </p>
+
+            <p>
+              Dès lors, nous avons établi la construction de notre algorithme solver en différentes étapes prédéfinies :
+            </p>
+
+            <p>
+              Dans un premier temps, nous avons créé un programme permettant de vérifier si une case est vide
+              dans le sudoku afin d’y inscrire un chiffre compris entre 1 et 9.
+            </p>
+
+            <p>
+              <code>
+                int find_empty-cell(int* i, int* j, int** sudoku)
+              </code>
+            </p>
+
+            <p>
+              Ensuite, une fois que nous avons vérifié le nombre de cases vides dans la grille du sudoku,
+              les règles du jeu citées précédemment sont appliquées.
+            </p>
+
+            <p>
+              Nous avons créé un programme permettant de vérifier si sur chaque ligne, quand je veux ajouter
+              un chiffre, que ce dernier ne soit pas déjà présent. Par exemple, si le chiffre 2 est déjà présent,
+              le programme renverra 0 (faux) sinon 1 (vrai). Si le programme renvoi vrai, alors on sait que
+              l’on peut mettre le chiffre 2 sur cette ligne.
+            </p>
+
+            <p>
+              <code>
+                int check_line(int i,int digit, int** sudoku)
+              </code>
+            </p>
+
+            <p>
+              Par la suite, nous avons créé un programme similaire permettant de vérifier si sur chaque colonne,
+              quand je veux ajouter un chiffre, que ce dernier ne soit pas déjà présent. Par exemple, si le
+              chiffre 2 est déjà présent, le programme renverra 0 (faux) sinon 1 (vrai). Si le programme renvoi
+              vrai, alors on sait que l’on peut mettre le chiffre 2 sur cette colonne.
+            </p>
+
+            <p>
+              <code>
+                int check_colum(int digit, int j, int** sudoku)
+              </code>
+            </p>
+
+            <p>
+              Puis, nous avons refait l’étape à l’identique que précédemment mais dans un mini carré (3*3) qui
+              vérifie si sur chaque colonne et chaque ligne lorsque je veux ajouter un chiffre, que ce dernier ne
+              soit pas déjà présent. Par exemple, si le chiffre 2 est déjà présent, le programme renvoi 0 (faux)
+              sinon 1 (vrai). Si le programme renvoi « vrai », alors on sait que l’on peut mettre le chiffre 2
+              sur cette ligne.
+            </p>
+
+            <p>
+              <code>
+                int check_square(int i, int j, int digit, int** sudoku)
+              </code>
+            </p>
+
+            <p>
+              Pour finir, nous avons conçu le programme <code>IsValidSudoku</code> qui renvoie vrai si les 3 programmes
+              précédents sont vérifiés. Le sudoku sera alors valide et nous pourrons donc réaliser le solver de
+              sudoku qui résout le sudoku en entier.
+            </p>
+
+            <p>
+              <code>
+                int IsValidSudoku(int i, int j, int digit, int** sudoku)
+              </code>
+            </p>
+            <p>
+              <code>
+                int solver_sudoku(int** sudoku)
+              </code>
+            </p>
+
+            <p>
+              Lorsque toutes les fonctions « mathématiques » sont effectuées, il faut prendre en charge
+              la lecture et l’écriture d’un fichier. La lecture permet de récupérer un fichier dans lequel un
+              sudoku incomplet est sauvegardé afin de le lire et le stocker.
+            </p>
+
+            <p>
+              <code>
+                void readsudo(char* file, int** sudoku)
+              </code>
+            </p>
+
+            <p>
+              A partir du moment où la lecture est effectuée, je vérifie si le sudoku s’est bien résolu en
+              contrôlant si toutes les cases sont remplies et qu’il y ait bien une solution pour chaque case.
+              S’il s’est bien résolu, j’élabore un nouveau fichier contenant le sudoku résolu en respectant les
+              normes du fichier d’origine. Nous pouvons ainsi trouver un nouveau fichier créé contenant la
+              grille de sudoku remplie. Si le sudoku ne s’est pas résolu, un message d’erreur s’affiche.
+            </p>
+
+            <p>
+              Ce nouveau fichier est le fichier d’entrée avec un ajout d’extension <code>« .result »</code>. En affichant
+              le contenu du nouveau fichier, on remarque que les points d’origines ont été remplacés par des
+              chiffres et qu’il n’y ait aucun chiffre en double sur une ligne, une colonne ou un carré de 3*3.
+              Le format de sortie est le même que le format d’origine.
+            </p>
+
+            <div class="text-center">
+              <img class="responsiveimg" src="assets/img/figure1.png" alt="Figure 1 – Sudoku initialisé et sauvegardé">
+              <p class="text-center"> <br>
+                Figure 1 – Sudoku initialisé et sauvegardé
+              </p>
+            </div>
+
+            <div class="text-center">
+              <img class="responsiveimg" src="assets/img/figure2.png" alt="Figure 2 – Exécution du programme et du solver permettant d’obtenir un nouveau fichier">
+              <p class="text-center"> <br>
+                Figure 2 – Exécution du programme et du solver permettant d’obtenir un nouveau fichier
+              </p>
+            </div>
+
+            <div class="text-center">
+              <img class="responsiveimg" src="assets/img/figure3.png" alt="Figure 3 – Affichage du nouveau fichier contenant le sudoku rempli et du même format que la première image">
+              <p class="text-center"> <br>
+                Figure 3 – Affichage du nouveau fichier contenant le sudoku rempli et du même format que la première image.
+              </p>
+            </div>
+          </div>
+
+          <div class="portfolio-description" >
+            <h2>Réseau de neurones</h2>
+            <p>
+              La réalisation du réseau de neurones se sépare en plusieurs parties :
+            </p>
+
+            <p>
+              La première partie est sur la création du réseau de neurones et son code pour l’utiliser.
+            </p>
+
+            <p>
+              Nous devons créer le réseau de neurones. Pour cela, nous sommes passés par un struct qui compose
+              un neurone. Puis, nous avons fait un tableau à deux dimensions qui contient ces neurones qui sont de
+              la forme : (voir image ci-dessous)
+            </p>
+
+            <div class="text-center">
+              <img class="responsiveimg" src="assets/img/figure4.png" alt="Réseau de neurones">
+            </div>
+          </div> <br>
+
+          <p>
+            Maintenant, nous devons pouvoir utiliser ce réseau de neurones. C’est pour cette raison que
+            nous avons réalisé une fonction. Celle-ci prend un tableau d’entrée et renvoie le résultat du max de
+            la layer une fois softmax appliqué. Pour trouver la valeur des neurones, nous utilisons cette
+            formule :
+          </p>
+
+          <p>
+            <code>Somme wi+ai + b</code> avec <code>wi</code> un weight associé au neurone de la layer précédent et le résultat
+            du neurone de la layer précédent. De plus, on rajoute le bias qui est relié à un neurone.
+          </p>
+
+          <p>
+            Une fois le calcul réalisé en feedforward, on peut récupérer le résultat.
+          </p>
+
+          <p>
+            Pour conclure dans cette partie, nous avons vu comment créer et utiliser le réseau de neurones.
+          </p>
+
+          <p>
+            La seconde partie est sur l’apprentissage du réseau de neurones.
+          </p>
+
+          <p>
+            Dans cette partie, nous allons voir comment nous avons permis à notre réseau de neurones d’apprendre.
+            Pour ce faire, l’idée principale est de réaliser un coût et de voir à quel point la sortie
+            de notre réseau de neurones est fausse. A cet effet, on utilise cette formule :
+          </p>
+
+          <code>
+            Somme 1/2(predicted - Exepted)**2
+          </code>
+
+          <p>
+            Le réseau de neurones est bon si cette somme est exacte.
+          </p>
+
+          <p>
+            Maintenant, il faut modifier les billets et les poids des réseaux de neurones. Pour ce faire,
+            il faut réaliser un backpropagation sur l’ensemble des réseaux. Ainsi, nous allons effectuer le
+            ratio des dérivées partielles entre l’erreur totale puis le multiplier par le ratio de la sortie et Z
+            et multiplier par le ratio entre Z et le poids ou le billet.
+          </p>
+
+          <p>
+            Une fois tous les gradients récupérés qui permettent de savoir à quel point la fonction augmente,
+            nous devons modifier chaque poids et billet par cette formule :
+          </p>
+
+          <code>
+            Wi = Wi - learning rate * gradient Wi
+          </code>
+
+          <code>
+            Bi = Bi - learning rate * gradient Bi.
+          </code>
+
+          <p>
+            Pour diminuer le nombre de calculs, nous avons utilisé la méthode avec des groupes qui permettent
+            de faire la moyenne de plusieurs gradients et de modifier les réseaux de neurones. L’ensemble
+            de ces actions permet d’avoir des réseaux de neurones fonctionnels.
+          </p>
+
+          <!-- <div class="portfolio-description" >
+            <h2>This is an example of portfolio detail</h2>
+            <p>
+              Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+            </p>
+          </div> -->
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="copyright">
+            &copy; Copyright <strong>Tripletics</strong>. All Rights Reserved
+          </div>
+          <div class="credits">
+            <!--
+            All the links in the footer should remain intact.
+            You can delete the links only if you purchased the pro version.
+            Licensing information: https://bootstrapmade.com/license/
+            Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Imperial
+          -->
+          Designed by <a href="#">Tripletics</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

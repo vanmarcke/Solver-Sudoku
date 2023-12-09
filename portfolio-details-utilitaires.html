@@ -122,6 +122,8 @@
               <p>
                 Nix-shell <br>
                 Formatage du code <br>
+                GTK <br>
+                Homogénéité du code <br>
               </p>
             </div>
           </div>
@@ -135,6 +137,7 @@
               quelque soit le système de compilation (dans la limite des systèmes supportant nix), obtenir
               une compilation la plus reproductible possible.
             </p>
+
             <p>Certains utilitaires ont été ajoutés dans ce shell par rapport aux machines de l’école, tel que
               Bear, un programme permettant de générer des bases de données de compilation à partir des
               Makefile.
@@ -151,11 +154,62 @@
               également mis en place afin d’indiquer quelques règles basiques aux éditeurs de textes utilisés
               (format de fin de ligne, encodage du fichier, model d’indentation, taille des indentations).
             </p>
+
             <p>L’ajustement de la taille des lignes pour ne pas excéder les 80 colonnes est effectué par le
               programme clang-format.
             </p>
           </div>
 
+          <div  id="formatage" class="portfolio-description">
+            <h2>GTK</h2>
+            <p>
+              La bibliothèque <code>GTK</code> est une bibliothèque écrite en C se voulant orientée objet. Le principe
+              de l’orienté objet est très utile. D’ailleurs une surcouche du C, le C++ a été réalisée pour palier
+              à ce manque. En revanche, la bibliothèque <code>GTK</code> ne profite pas de l’implémentation objet du
+              C++ et à la place, il fait une simulation d’héritage à grand renfort de macros et de pointeurs
+              de fonctions.
+            </p>
+
+            <p>
+              Les soucis commencent lorsque pour afficher une image, l’image affichée en utilisant <code>GtkImage</code>
+              est trop grande pour la fenêtre et évidemment, <code>GtkImage</code> ne dispose pas d’un système
+              permettant de redimensionner les images à la taille de la fenêtre. Il a donc fallu créer notre propre
+              système qui redimensionne une image. Pour se faire, nous avons derivé la classe <code>GtkDrawingArea</code>
+              pour créer notre class Image, qui a cette propriété de redimensionnement automatique.
+            </p>
+
+            <p>
+              Le problème provient de la syntaxe et de la documentation : bien qu’ancienne et progressivement
+              dépréciée pour la version 4, <code>Gtk3</code> ne dispose que d’une documentation légère sur la
+              façon de procéder pour faire un héritage. De plus, on constate également que la documentation
+              en question n’est pas mise à jour régulièrement car elle utilise des macros dépréciées entre-temps.
+            </p>
+
+            <p>
+              En résumé, ce qui en C++ aurait pris 2 voir 3 lignes simples à comprendre, prendra en C
+              plusieurs dizaines de lignes de code sacrifiant ainsi la lisibilité du code.
+            </p>
+          </div>
+
+          <div  id="formatage" class="portfolio-description">
+            <h2>Homogénéité du code</h2>
+            <p>
+              Le code est écrit par 4 personnes. Par conséquent, les conventions utilisées par chacun sont
+              différentes. De plus, dans le code d’une même personne, il est également possible de voir des
+              changements majeurs de style, ce qui nuit à la lisibilité du code. Chacune des conventions est
+              raisonnable en revanche leur changement est mauvais.
+            </p>
+
+            <p>
+              Pour palier à ce problème, nous avons mis en place les outils de formatage décrits dans la
+              section des Utilitaires mis en place : <a href="portfolio-details-utilitaires.html#formatage">Formatage du code</a>
+            </p>
+
+            <p>
+              Il est également possible de noter un certains nombres de fonctions qui gagneraient à être
+              séparées en sous fonctions de taille plus raisonnables.
+            </p>
+          </div>
         </div>
 
       </div>

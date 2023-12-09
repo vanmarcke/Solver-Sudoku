@@ -120,61 +120,33 @@
             <div class="portfolio-description"><br>
               <h2>Résumé</h2>
               <p>
-                GTK <br>
-                Homogénéité du code <br>
-                Problèmes connus du code <br>
+                Dataset <br>
+                Fuite de mémoire <br>
+                Usage de fonctions dépréciées <br>
+                Paramètres non utilisés <br>
+                Reconstruction de la grille, affichage et sauvegarde <br>
               </p>
             </div>
           </div>
 
-          <div class="portfolio-description">
-            <h2>GTK</h2>
+          <div class="portfolio-description" >
+            <h2>Problèmes connus du code</h2>
+            <h4>Dataset</h4>
             <p>
-              La bibliothèque GTK est une bibliothèque écrite en C se voulant orientée objet. Le principe
-              de l’orienté objet est très utile. D’ailleurs une surcouche du C, le C++ a été réalisée pour palier
-              à ce manque. En revanche, la bibliothèque GTK ne profite pas de l’implémentation objet du
-              C++ et à la place, il fait une simulation d’héritage à grand renfort de macro et de pointeurs
-              de fonctions.
-            </p>
-            <p>
-              Les soucis commencent lorsque pour afficher une image, l’image affichée en utilisant <code>GtkImage</code>
-              est trop grande pour la fenêtre et évidemment, GtkImage ne dispose pas d’un système
-              permettant de redimensionner les images à la taille de la fenêtre. Il a donc fallu créer notre propre
-              système qui redimensionne une image. Pour se faire, nous avons derivé la classe <code>GtkDrawingArea</code>
-              pour créer notre class Image, qui a cette propriété de redimensionnement automatique.
-            </p>
-            <p>
-              Le problème provient de la syntaxe et de la documentation : bien qu’ancienne et progressivement
-              dépréciée pour la version 4, Gtk3 ne dispose que d’une documentation légère sur la
-              façon de procéder pour faire un héritage. De plus, on constate également que la documentation
-              en question n’est pas mise à jour régulièrement car elle utilise des macros dépréciées entre-temps.
-            </p>
-            <p>
-              En résumé, ce qui en C++ aurait pris 2 voir 3 lignes simples à comprendre, prendra en C
-              plusieurs dizaines de lignes de code sacrifiant ainsi la lisibilité du code.
-            </p>
-          </div>
-
-          <div class="portfolio-description">
-            <h2>Homogénéité du code</h2>
-            <p>
-              Le code est écrit par 4 personnes. Par conséquent, les conventions utilisées par chacun sont
-              différentes. De plus, dans le code d’une même personne, il est également possible de voir des
-              changements majeurs de style, ce qui nuit à la lisibilité du code. Chacune des conventions est
-              raisonnable en revanche leur changement est mauvais.
-            </p>
-            <p>
-              Pour palier à ce problème, nous avons mis en place les outils de formatage décrits dans la
-              section des Utilitaires mis en place : <a href="portfolio-details-utilitaires.html#formatage">Formatage du code</a>
-            </p>
-            <p>
-              Il est également possible de noter un certains nombres de fonctions qui gagneraient à être
-              séparées en sous fonctions de taille plus raisonnables.
+              La recherche et la sélection d’un ensemble de données pour la reconnaissance optique de caractères
+              (OCR) axée sur des chiffres imprimés peuvent présenter plusieurs défis. Tout d’abord,
+              il peut être difficile de trouver un ensemble de données spécifiquement dédié aux chiffres imprimé,
+              car de nombreuses bases de données OCR incluent une variété de caractères. De plus,
+              la qualité des images et la diversité des polices peuvent considérablement varier, impactant la
+              performance du modèle. Certains ensembles de données peuvent au même titre présenter des
+              problèmes tels que des variations d’échelles, des distorsions ou des bruits, ce qui peut éventuellement
+              la tâche de reconnaissance plus complexe. En outre, la disponibilité d’un ensemble de
+              données étiqueté de manière adéquate, avec des annotations précises pour chaque chiffre, peut
+              être limitée, ce qui complique la formation et l’évaluation du modèle OCR.
             </p>
           </div>
 
           <div class="portfolio-description" >
-            <h2>Problèmes connus du code</h2>
             <h4>Fuite de mémoire</h4>
             <p>
               Au moment où ce rapport est écrit, il existe une fuite de mémoire importante localisée dans
@@ -187,15 +159,13 @@
           <div class="portfolio-description" >
             <h4>Usage de fonctions dépréciées</h4>
             <p>
-              Dans certains morceaux du code, des fonctions dépréciées sont utilisées, faute d’avoir trouver
+              Dans certains morceaux du code, des fonctions dépréciées sont utilisées, faute d’avoir trouvé
               de la documentation indiquant les fonctions "modernes" à utiliser.
             </p>
-
             <p>
               Dans ce domaine se trouvent les fonctions <code>g_type_class_add_private</code> et <code>G_ADD_PRIVATE</code>
-              utilisées lors de la dérivation de la classe <code>GtkDrawingArea</code>.
+              utilisées lors de la dérivation de la classe GtkDrawingArea.
             </p>
-
             <p>
               Pour se débarasser de ces avertissements au titre de mesure temporaire, les avertissements
               relatifs aux fonctions dépréciées ont été désactivés dans le fichier concerné.
@@ -213,20 +183,33 @@
           </div>
 
           <div class="portfolio-description" >
-            <h4>Cases non détéctées</h4>
+            <h4>Reconstruction de la grille, affichage et sauvegarde</h4>
             <p>
-              Les cases ne sont que imparfaitement détéctées. La reconnaissance des cases est basée sur
-              la reconnaissance des lignes qui ne fonctionnent pas toujours parfaitement. Donc, sur l’exemple
-              parfaitement net, le programme reconnait actuellement 54 cases sur les 81 composants l’image
-              mais, reconnait parfaitement la grille sur la page de journal. La majorité de la grille est détectée
-              en revanche, la partie située en bas ne passe pas le seuil et n’est donc pas détectée. Sur cette
-              image, le programme repère 45 cases sur les 81 de la grille.
+              Manipuler une image venant d’un <code>GdkPixbuf*</code> n’est pas une tâche aisée qui demande une
+              certaine concentration.. En effet sur GDK, les données d’une image sont un tableau de valeur
+              de taille : largeur*hauteur*(nombre de canaux) et contenant que des valeurs comprises entre 0
+              et 255.
             </p>
 
             <p>
-              Il est également notable que suivant la rotation de l’image, les cases sont plus ou moins bien détectées.
+              Par exemple, le premier pixel (situé en haut à gauche) correspond au 3 ou 4 premières valeur
+              du tableau : le canal rouge, vert, bleu et si il y a un quatrième canal, alpha qui est la transparence.
             </p>
+
+            <p>
+              Dès lors, nous avons donc été confrontés à de multiples et diverses erreurs dans notre code,
+              donnant une image non conforme à ce qui est attendu. Nous avons ainsi constaté que ces erreurs
+              étaient dues à de mauvaises valeurs et que celles-ci se comptaient par dizaines. Voici quelques
+              images tests obtenues :
+            </p>
+
+            <div class="text-center">
+              <img class="responsiveimg" src="assets/img/figure40.png" alt="(a) Manque les chiffres, (b) Chiffres mal copiés et manque du quadrillage, (c) Mauvaise taille de la grille et (d) Mauvaise taille des chiffres">
+            </div>
+
+            <br><br><br>
           </div>
+
         </div>
       </div>
     </section><!-- End Portfolio Details Section -->
